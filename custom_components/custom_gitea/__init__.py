@@ -1,1 +1,1 @@
-"""The dealabs alert component."""
+"""The Gitea component."""
