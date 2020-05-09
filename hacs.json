@@ -1,0 +1,6 @@
+{
+  "name": "gitea",
+  "domains": ["sensor"],
+  "render_readme": true,
+  "country": "FR"
+}

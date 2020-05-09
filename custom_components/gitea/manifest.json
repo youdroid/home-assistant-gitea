@@ -1,0 +1,8 @@
+{
+  "domain": "gitea",
+  "name": "gitea",
+  "documentation": "https://github.com/youdroid/home-assistant-gitea",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@youdroid"]
+}

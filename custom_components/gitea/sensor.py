@@ -8,8 +8,7 @@ from homeassistant.components.switch import PLATFORM_SCHEMA
 from homeassistant.const import CONF_TOKEN, CONF_PORT, CONF_HOST, CONF_PATH, CONF_NAME, CONF_USERNAME, CONF_PROTOCOL
 
 _LOGGER = logging.getLogger(__name__)
-DEFAULT_NAME = "Gitea"
-# SCAN_INTERVAL = timedelta(hours=1)
+DEFAULT_NAME = "gitea"
 
 CONF_REPOS = "repositories"
 ATTR_REPO_NAME = "Repository"
@@ -42,11 +41,11 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
 def setup_platform(hass, config, add_entities, discovery_info=None):
     for repo in config[CONF_REPOS]:
-        add_entities([DealabsSensor(config.get(CONF_USERNAME), config.get(CONF_TOKEN), config.get(CONF_PROTOCOL),
-                                    config.get(CONF_HOST), config.get(CONF_PORT), repo)])
+        add_entities([GiteaSensor(config.get(CONF_USERNAME), config.get(CONF_TOKEN), config.get(CONF_PROTOCOL),
+                                  config.get(CONF_HOST), config.get(CONF_PORT), repo)])
 
 
-class DealabsSensor(Entity):
+class GiteaSensor(Entity):
     """Representation of a Sensor."""
 
     def __init__(self, username=None, token=None, proto=None, api_url=None, api_port=None, repo=None,
@@ -74,7 +73,7 @@ class DealabsSensor(Entity):
     @property
     def name(self):
         """Return the name of the sensor."""
-        return self.repo
+        return DEFAULT_NAME + "_" + self.repo
 
     @property
     def state(self):
