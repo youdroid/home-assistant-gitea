@@ -1,7 +1,7 @@
 {
   "domain": "gitea",
   "name": "gitea",
-  "version": "1.1",
+  "version": "1.2",
   "documentation": "https://github.com/youdroid/home-assistant-gitea",
   "requirements": [],
   "dependencies": [],
