@@ -24,6 +24,7 @@ ATTR_MIRROR = "isMirror"
 ATTR_REPO_URL = "Repository Url"
 ATTR_STARS = "Stars"
 ATTR_WATCH = "Watchers"
+ATTR_UPDATED_AT = 'Updated at'
 
 REPO_SCHEMA = vol.Schema(
     {vol.Required(CONF_PATH): cv.string, vol.Optional(CONF_NAME): cv.string}
@@ -50,7 +51,7 @@ class GiteaSensor(Entity):
 
     def __init__(self, token=None, proto=None, api_url=None, api_port=None, repo=None,
                  id=None, description=None, open_issues_count=None, default_branch=None, size=None,
-                 owner_name=None, private=None, stars=None, fork=None, mirror=None, url=None):
+                 owner_name=None, private=None, stars=None, fork=None, mirror=None, url=None, updated_at=None):
         self._state = None
         self.token = token
         self.proto = proto
@@ -69,6 +70,7 @@ class GiteaSensor(Entity):
         self.stars = stars
         self.url = url
         self.watcher = None
+        self.updated_at = updated_at
 
     @property
     def name(self):
@@ -101,7 +103,8 @@ class GiteaSensor(Entity):
             ATTR_DEFAULT_BR: self.default_branch,
             ATTR_REPO_URL: self.url,
             ATTR_SIZE: self.size,
-            ATTR_WATCH: self.watcher
+            ATTR_WATCH: self.watcher,
+            ATTR_UPDATED_AT: self.updated_at
         }
         return attrs
 
@@ -121,6 +124,7 @@ class GiteaSensor(Entity):
         self.url = infos["html_url"]
         self._state = infos["default_branch"]
         self.watcher = infos["watchers_count"]
+        self.updated_at = infos["updated_at"]
 
     def getUrl(self):
         return '{0}://{1}:{2}/api/v1/repos/{3}/{4}'.format(self.proto, self.api_url, self.api_port, self.repo.split('/')[0],
@@ -135,10 +139,3 @@ class GiteaSensor(Entity):
 
     def apiCall(self):
         return requests.request(method='GET', url=self.getUrl(), headers=self.getHeader()).json()
-
-
-
-
-
-
-
