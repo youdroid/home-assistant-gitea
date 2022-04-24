@@ -1,9 +1,10 @@
 {
   "domain": "gitea",
   "name": "gitea",
-  "version": "1.2",
+  "version": "1.2.1",
   "documentation": "https://github.com/youdroid/home-assistant-gitea",
   "requirements": [],
   "dependencies": [],
-  "codeowners": ["@youdroid"]
+  "codeowners": ["@youdroid"],
+  "iot_class": "cloud_polling"
 }
